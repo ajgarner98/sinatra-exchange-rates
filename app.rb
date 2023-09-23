@@ -2,9 +2,8 @@ require "sinatra"
 require "sinatra/reloader"
 require "http"
 require "json"
-
-
-
+require 'net/http'
+require 'uri'
 
 get("/") do
   @x = HTTP.get("https://api.exchangerate.host/symbols")
@@ -35,5 +34,14 @@ get("/:currency/:conversion") do
   @z = @y.fetch("symbols")
   @o = @z.fetch("AED")
   @w = "cool"
+  url = "https://api.exchangerate.host/convert?from=USD&to=EUR"
+  uri = URI(url)
+  response = Net::HTTP.get(uri)
+  response_obj = JSON.parse(response)
+  {"from" => "USD",
+    "to" => "EUR",
+    "amount" => 1
+  }
+
   erb(:conversion)
 end
