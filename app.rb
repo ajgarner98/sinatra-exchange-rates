@@ -20,6 +20,20 @@ get("/:currency") do
   @y = JSON.parse(@x)
   @z = @y.fetch("symbols")
   @o = @z.fetch("AED")
-  @w = "cool"
+  @t = HTTP.get("https://api.exchangerate.host/convert")
+  @u = JSON.parse(@t)
   erb(:currency)
+end
+
+get("/:currency/:conversion") do
+  @q = params.fetch("currency")
+  @r = params.fetch("conversion")
+  @x = HTTP.get("https://api.exchangerate.host/symbols")
+  @t = HTTP.get("https://api.exchangerate.host/convert")
+  @u = JSON.parse(@t)
+  @y = JSON.parse(@x)
+  @z = @y.fetch("symbols")
+  @o = @z.fetch("AED")
+  @w = "cool"
+  erb(:conversion)
 end
