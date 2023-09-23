@@ -5,7 +5,7 @@
 
   <%@z.each do |b,c| %>
     <li>
-      <a href = <%= params.fetch("currency") %>/<%=b%>>
+      <a href = "/<%= params.fetch("currency") %>/<%=b%>">
       Convert 1 <%= params.fetch("currency") %> to <%=b%>...
       </a>
     </li>
