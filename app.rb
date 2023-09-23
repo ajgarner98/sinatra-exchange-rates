@@ -25,23 +25,13 @@ get("/:currency") do
 end
 
 get("/:currency/:conversion") do
-  @q = params.fetch("currency")
-  @r = params.fetch("conversion")
-  @x = HTTP.get("https://api.exchangerate.host/symbols")
-  @t = HTTP.get("https://api.exchangerate.host/convert")
-  @u = JSON.parse(@t)
-  @y = JSON.parse(@x)
-  @z = @y.fetch("symbols")
-  @o = @z.fetch("AED")
-  @w = "cool"
-  url = "https://api.exchangerate.host/convert?from=USD&to=EUR"
+  @param_one = params.fetch("currency")
+  @param_two = params.fetch("conversion")
+  url = "https://api.exchangerate.host/convert?from=#{@param_one}&to=#{@param_two}"
   uri = URI(url)
   response = Net::HTTP.get(uri)
-  response_obj = JSON.parse(response)
-  {"from" => "USD",
-    "to" => "EUR",
-    "amount" => 1
-  }
-
+  @response_obj = JSON.parse(response)
+  @converted_result = @response_obj.fetch("result")
+  
   erb(:conversion)
 end
