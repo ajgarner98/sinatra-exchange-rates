@@ -1,2 +1,12 @@
-<%= params.fetch("currency") %>
-<p><%=@w%></p>
+<h1> Convert <%= params.fetch("currency") %></h1>
+
+<ul>
+
+  <%@z.each do |b,c| %>
+    <li>
+      <a href = <%=b%>>
+      Convert 1 <%= params.fetch("currency") %> to <%=b%>...
+      </a>
+    </li>
+  <%end%>
+</ul>
